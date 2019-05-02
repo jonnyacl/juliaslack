@@ -42,9 +42,9 @@ app.post('/clients', function(req, res) {
     })
 });
 
-app.post('/clients/:accId/:cId/bals', function(req, res) {
-    const compId = req.params.cId
-    const accId = req.params.accId
+app.post('/clients/bals', function(req, res) {
+    const compId = 65
+    const accId = "howdyhey"
     authApi.getToken().then(resp => {
         bankApi.getAccountBalances(resp.data.access_token, 7, accId, compId).then(bankResp => {
             console.log(bankResp.data)
@@ -61,9 +61,9 @@ app.post('/clients/:accId/:cId/bals', function(req, res) {
     })
 });
 
-app.post('/clients/:accId/:cId/cashflow', function(req, res) {
-    const compId = req.params.cId
-    const accId = req.params.accId
+app.post('/clients/cashflow', function(req, res) {
+    const compId = 65
+    const accId = "howdyhey"
     authApi.getToken().then(resp => {
         bankApi.getAccountTransactions(resp.data.access_token, 7, accId, compId).then(bankResp => {
             console.log(bankResp.data)
