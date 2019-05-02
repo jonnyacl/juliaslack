@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "npm install",
-    "test": "standard"
+    "start": "node server.js"
   },
   "browserslist": {
     "production": [

@@ -1,18 +1,16 @@
-// const config = require("./config").config
+'use strict';
 
+const path = require('path');
 const express = require('express');
+const http = require('http');
 
 const app = express();
-// const authApi = require("./api/auth").auth
-// const bankApi = require("./api/banking").banking
-// const aApi = authApi.createAuthApi("REPLACE", "faekpartner");
-// const bApi = bankApi.createBankApi("REPLACE", "faekpartner");
+const server = http.Server(app);
 
-app.get('/clients', (req, res) => {
-    res.send("Heroku running");
-});
+const port = process.env.PORT || 8080;
 
-app.listen(4000, () => {
-    // console.log(config)
-    console.log("Fractal SB server running...");
+app.use('/', express.static(path.join(__dirname, 'testheroku')));
+
+server.listen(port, () => {
+  console.log(`Fractal Julia started on port ${port}`);
 });
