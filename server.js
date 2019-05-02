@@ -19,6 +19,10 @@ app.get('/token', (req, res) => {
     })
 });
 
+app.get('/clients', (req, res) => {
+    res.send("Heroku running");
+});
+
 app.get('/banking/accounts', (req, res) => {
     aApi.getToken().then(resp => {
         bApi.getAccounts(resp.data.access_token, 7).then(bankResp => {
