@@ -13,7 +13,7 @@ app.get('/', function(req, res) {
     res.send("Julia Slack");
 });
 
-app.get('/clients', function(req, res) {
+app.post('/clients', function(req, res) {
     res.send("Julia Slack Clients");
 });
 
