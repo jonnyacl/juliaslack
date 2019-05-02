@@ -13,6 +13,10 @@ app.get('/', function(req, res) {
     res.send("Julia Slack");
 });
 
+app.get('/clients', function(req, res) {
+    res.send("Julia Slack Clients");
+});
+
 server.listen(port, () => {
   console.log(`Fractal Julia started on port ${port}`);
 });
