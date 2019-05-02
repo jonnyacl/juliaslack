@@ -55,7 +55,7 @@ app.post('/clients/bals', function(req, res) {
             const bals = []
             for (let c in respData.results) {
                 console.log(respData.results[c])
-                bals.push({ balance: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].date })
+                bals.push({ company: respData.results[c].companyId, account: respData.results[c].accountId, balance: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].date })
             }
             res.send(JSON.stringify(bals));
         }).catch(err => {
@@ -79,7 +79,7 @@ app.post('/clients/cashflow', function(req, res) {
             const bals = []
             for (let c in respData.results) {
                 console.log(respData.results[c])
-                bals.push({ transaction: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].bookingDate, info: respData.results[c].description, type: respData.results[c].type, merchant: respData.results[c].merchant.name })
+                bals.push({ company: respData.results[c].companyId, account: respData.results[c].accountId, transaction: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].bookingDate, info: respData.results[c].description, type: respData.results[c].type, merchant: respData.results[c].merchant.name })
             }
             res.send(JSON.stringify(bals));
         }).catch(err => {
