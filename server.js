@@ -27,9 +27,9 @@ app.post('/clients', function(req, res) {
             const companies = []
             for (let c in respData.results) {
                 console.log(respData.results[c])
-                companies.push({ companyId: respData.results[c].companyId, accountId: respData.results[c].AccountId })
+                companies.push({ company: respData.results[c].companyId, account: respData.results[c].AccountId })
             }
-            res.send(JSON.stringify({ companies }));
+            res.send(JSON.stringify(companies));
         }).catch(err => {
             console.log(err)
             res.status(err.response.status)
