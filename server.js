@@ -1,6 +1,5 @@
 'use strict';
 
-const path = require('path');
 const express = require('express');
 const http = require('http');
 
@@ -16,9 +15,12 @@ const server = http.Server(app);
 
 const port = process.env.PORT || 8080;
 
-app.get('/', function(req, res) {
-    res.send("Julia Slack");
+app.get('/julia', function(req, res) {
+    res.send("Hi I'm Julia. I'll help you manage your multiple spouses");
 });
+
+let cId = undefined;
+let acctId = undefined;
 
 app.post('/clients', function(req, res) {
     authApi.getToken().then(resp => {
@@ -28,6 +30,8 @@ app.post('/clients', function(req, res) {
             for (let c in respData.results) {
                 console.log(respData.results[c])
                 companies.push({ company: respData.results[c].companyId, account: respData.results[c].AccountId })
+                cId = respData.results[c].companyId;
+                acctId = respData.results[c].AccountId;
             }
             res.send(JSON.stringify(companies));
         }).catch(err => {
@@ -43,12 +47,17 @@ app.post('/clients', function(req, res) {
 });
 
 app.post('/clients/bals', function(req, res) {
-    const compId = 65
-    const accId = "howdyhey"
+    const compId = cId ? cId : 65;
+    const accId = acctId ? acctId : "ohhithere";
     authApi.getToken().then(resp => {
         bankApi.getAccountBalances(resp.data.access_token, 7, accId, compId).then(bankResp => {
-            console.log(bankResp.data)
-            res.send(JSON.stringify(bankResp.data));
+            const respData = bankResp.data;
+            const bals = []
+            for (let c in respData.results) {
+                console.log(respData.results[c])
+                bals.push({ balance: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].date })
+            }
+            res.send(JSON.stringify(bals));
         }).catch(err => {
             console.log(err.response.data)
             res.status(err.response.status)
@@ -62,12 +71,17 @@ app.post('/clients/bals', function(req, res) {
 });
 
 app.post('/clients/cashflow', function(req, res) {
-    const compId = 65
-    const accId = "howdyhey"
+    const compId = cId ? cId : 65;
+    const accId = acctId ? acctId : "ohhithere";
     authApi.getToken().then(resp => {
         bankApi.getAccountTransactions(resp.data.access_token, 7, accId, compId).then(bankResp => {
-            console.log(bankResp.data)
-            res.send(JSON.stringify(bankResp.data));
+            const respData = bankResp.data;
+            const bals = []
+            for (let c in respData.results) {
+                console.log(respData.results[c])
+                bals.push({ transaction: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].bookingDate, info: respData.results[c].description, type: respData.results[c].type, merchant: respData.results[c].merchant.name })
+            }
+            res.send(JSON.stringify(bals));
         }).catch(err => {
             console.log(err.response.data)
             res.status(err.response.status)
