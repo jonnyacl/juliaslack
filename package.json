@@ -8,7 +8,7 @@
     "fractalsdk": "github:jonnyacl/fractalsdk"
   },
   "scripts": {
-    "build": "node server.js",
+    "build": "npm install",
     "test": "standard"
   },
   "browserslist": {
