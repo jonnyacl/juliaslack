@@ -9,7 +9,9 @@ const server = http.Server(app);
 
 const port = process.env.PORT || 8080;
 
-app.use('/', express.static(path.join(__dirname, 'testheroku')));
+app.get('/', function(req, res) {
+    res.send("Julia Slack");
+});
 
 server.listen(port, () => {
   console.log(`Fractal Julia started on port ${port}`);
