@@ -33,7 +33,7 @@ app.post('/clients', function(req, res) {
                 cId = respData.results[c].companyId;
                 acctId = respData.results[c].AccountId;
             }
-            res.send(JSON.stringify(companies));
+            res.send(`These SMEs need your love: ${JSON.stringify(companies)}`);
         }).catch(err => {
             console.log(err)
             res.status(err.response.status)
@@ -57,7 +57,7 @@ app.post('/clients/bals', function(req, res) {
                 console.log(respData.results[c])
                 bals.push({ company: respData.results[c].companyId, account: respData.results[c].accountId, balance: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].date })
             }
-            res.send(JSON.stringify(bals));
+            res.send(`Your struggling SMEs' recent account balances: ${JSON.stringify(bals)}`);
         }).catch(err => {
             console.log(err.response.data)
             res.status(err.response.status)
@@ -81,7 +81,7 @@ app.post('/clients/cashflow', function(req, res) {
                 console.log(respData.results[c])
                 bals.push({ company: respData.results[c].companyId, account: respData.results[c].accountId, transaction: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].bookingDate, info: respData.results[c].description, type: respData.results[c].type, merchant: respData.results[c].merchant.name })
             }
-            res.send(JSON.stringify(bals));
+            res.send(`Your struggling SMEs' recent cashflow: ${JSON.stringify(bals)}`);
         }).catch(err => {
             console.log(err.response.data)
             res.status(err.response.status)
