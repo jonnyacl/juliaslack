@@ -15,7 +15,7 @@ const server = http.Server(app);
 
 const port = process.env.PORT || 8080;
 
-app.get('/julia', function(req, res) {
+app.post('/julia', function(req, res) {
     res.send("Hi I'm Julia. I'll help you manage your multiple spouses");
 });
 
