@@ -33,7 +33,7 @@ app.post('/clients', function(req, res) {
                 cId = respData.results[c].companyId;
                 acctId = respData.results[c].AccountId;
             }
-            res.send(`These SMEs need your love: ${JSON.stringify(companies)}`);
+            res.send("These SMEs need your love: " + "```" + JSON.stringify(companies) + "```");
         }).catch(err => {
             console.log(err)
             res.status(err.response.status)
