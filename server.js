@@ -57,7 +57,7 @@ app.post('/clients/bals', function(req, res) {
                 console.log(respData.results[c])
                 bals.push({ company: respData.results[c].companyId, account: respData.results[c].accountId, balance: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].date })
             }
-            res.send(`Your struggling SMEs' recent account balances: ${JSON.stringify(bals)}`);
+            res.send("Your struggling SMEs' recent account balances: " + "```" + JSON.stringify(bals) + "```");
         }).catch(err => {
             console.log(err.response.data)
             res.status(err.response.status)
@@ -81,7 +81,7 @@ app.post('/clients/cashflow', function(req, res) {
                 console.log(respData.results[c])
                 bals.push({ company: respData.results[c].companyId, account: respData.results[c].accountId, transaction: respData.results[c].amount, currency: respData.results[c].currencyCode, date: respData.results[c].bookingDate, info: respData.results[c].description, type: respData.results[c].type, merchant: respData.results[c].merchant.name })
             }
-            res.send(`Your struggling SMEs' recent cashflow: ${JSON.stringify(bals)}`);
+            res.send("Your struggling SMEs' recent cashflow: " + "```" + JSON.stringify(bals) + "```");
         }).catch(err => {
             console.log(err.response.data)
             res.status(err.response.status)
